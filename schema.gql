@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type StudentModel {
+  id: ID!
+  name: String!
+}
+
+type ClasseModel {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+type Query {
+  classes: [ClasseModel!]!
+  classe(id: String!): ClasseModel!
+  students: [StudentModel!]!
+  student(id: String!): StudentModel!
+}
+
+type Mutation {
+  createClasse(name: String!, description: String!): ClasseModel!
+  createStudent(name: String!): StudentModel!
+}
