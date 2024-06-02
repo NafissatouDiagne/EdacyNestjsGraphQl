@@ -31,12 +31,12 @@ export class ClasseController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() classe: ClasseModel): void {
+  update(@Param('id') id: string, @Body() classe: string): void {
     this.classeService.update(String(id), classe);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string): void {
-    this.classeService.remove(String(id));
+    this.classeService.remove(id);
   }
 }

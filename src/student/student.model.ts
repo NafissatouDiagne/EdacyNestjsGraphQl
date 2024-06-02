@@ -11,4 +11,11 @@ export class StudentModel {
   @Field()
   @Column()
   name: string;
+  @Field()
+  @Column()
+  email: string;
+
+  @Field()
+  @Column()
+  classe: string;
 }

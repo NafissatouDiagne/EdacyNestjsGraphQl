@@ -1,4 +1,4 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, Int } from '@nestjs/graphql';
 
 import { ClasseService } from './classe.service';
 import { ClasseModel } from './classe.model';
@@ -17,14 +17,24 @@ export class ClasseResolver {
     return this.classeService.findOne(id);
   }
   @Mutation(() => ClasseModel)
-  async createClasse(
-    @Args('name') name: string,
-    @Args('description') description: string,
-  ): Promise<ClasseModel> {
+  async createClasse(@Args('name') name: string): Promise<ClasseModel> {
     return this.classeService.create({
       name,
-      description,
       id: 0,
     });
+  }
+  @Mutation(() => ClasseModel)
+  async updateClass(
+    @Args('id') id: string,
+    @Args('name') name: string,
+  ): Promise<ClasseModel> {
+    return this.classeService.update(id, name);
+  }
+
+  @Mutation(() => ClasseModel)
+  async removeClasse(
+    @Args('id', { type: () => Int }) id: string,
+  ): Promise<void> {
+    this.classeService.remove(id);
   }
 }

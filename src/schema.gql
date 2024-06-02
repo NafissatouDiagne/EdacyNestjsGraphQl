@@ -5,12 +5,13 @@
 type StudentModel {
   id: ID!
   name: String!
+  email: String!
+  classe: String!
 }
 
 type ClasseModel {
   id: ID!
   name: String!
-  description: String!
 }
 
 type Query {
@@ -21,8 +22,10 @@ type Query {
 }
 
 type Mutation {
-  createClasse(name: String!, description: String!): ClasseModel!
+  createClasse(name: String!): ClasseModel!
   updateClass(id: String!, name: String!): ClasseModel!
   removeClasse(id: Int!): ClasseModel!
-  createStudent(name: String!): StudentModel!
+  createStudent(name: String!, email: String!, classe: String!): StudentModel!
+  updateStudent(id: String!, name: String!, email: String!, classe: String!): StudentModel!
+  removeStudent(id: Int!): StudentModel!
 }

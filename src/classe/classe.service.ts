@@ -22,8 +22,13 @@ export class ClasseService {
     return await this.classeRepository.save(classe);
   }
 
-  async update(id: string, updatedclasse: ClasseModel): Promise<void> {
-    await this.classeRepository.update(id, updatedclasse);
+  async update(id: string, name: string): Promise<ClasseModel> {
+    const classe = await this.classeRepository.findOne({ where: { id: +id } });
+    if (!classe) {
+      throw new Error('Classe not found');
+    }
+    classe.name = name;
+    return this.classeRepository.save(classe);
   }
 
   async remove(id: string): Promise<void> {

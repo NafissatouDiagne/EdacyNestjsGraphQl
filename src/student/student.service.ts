@@ -18,8 +18,17 @@ export class StudentService {
   async create(student: StudentModel): Promise<StudentModel> {
     return await this.studentRepository.save(student);
   }
-  async update(id: string, student: StudentModel): Promise<void> {
-    await this.studentRepository.update(id, student);
+  async update(id: string, student: StudentModel): Promise<StudentModel> {
+    const students = await this.studentRepository.findOne({
+      where: { id: +id },
+    });
+    if (!students) {
+      throw new Error('Student not found');
+    }
+    students.name = student.name;
+    students.classe = student.classe;
+    students.email = student.email;
+    return this.studentRepository.save(students);
   }
   async remove(id: string): Promise<void> {
     await this.studentRepository.delete(id);
